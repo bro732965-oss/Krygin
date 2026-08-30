@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>AirPhone — смартфоны от KRYGIN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #f5f5fa;
+            color: #1d1d1f;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== ШАПКА ===== */
+        .header {
+            padding: 18px 0;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1d1d1f, #6e6e8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo span {
+            font-weight: 300;
+            color: #8e8e93;
+            -webkit-text-fill-color: #8e8e93;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .nav a {
+            margin-left: 20px;
+            color: #1d1d1f;
+            font-size: 15px;
+            font-weight: 500;
+            opacity: 0.7;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            opacity: 1;
+            color: #007aff;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+            margin-left: 20px;
+            border-left: 1px solid #d2d2d6;
+            padding-left: 16px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            font-size: 13px;
+            font-weight: 600;
+            color: #8e8e93;
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 20px;
+            transition: 0.2s;
+        }
+
+        .lang-btn.active {
+            background: #007aff;
+            color: #fff;
+        }
+
+        .lang-btn:hover {
+            color: #1d1d1f;
+        }
+        .lang-btn.active:hover {
+            color: #fff;
+        }
+
+        /* ===== ГЕРОЙ ===== */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: linear-gradient(180deg, #ffffff 0%, #f5f5fa 100%);
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            background: linear-gradient(135deg, #1d1d1f, #6e6e8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 22px;
+            color: #6e6e73;
+            margin-top: 16px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .sub {
+            font-size: 16px;
+            color: #8e8e93;
+            margin-top: 8px;
+        }
+
+        /* ===== СТЕКЛЯННЫЕ КАРТОЧКИ ===== */
+        .glass-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0 80px;
+        }
+
+        .glass-card {
+            border-radius: 40px;
+            padding: 36px 28px 32px;
+            color: #1d1d1f;
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s ease;
+            cursor: default;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+        }
+
+        .glass-card.blue {
+            background: rgba(0, 122, 255, 0.10);
+            border-color: rgba(0, 122, 255, 0.20);
+        }
+        .glass-card.green {
+            background: rgba(52, 199, 89, 0.10);
+            border-color: rgba(52, 199, 89, 0.20);
+        }
+        .glass-card.orange {
+            background: rgba(255, 149, 0, 0.10);
+            border-color: rgba(255, 149, 0, 0.20);
+        }
+        .glass-card.pink {
+            background: rgba(255, 45, 85, 0.08);
+            border-color: rgba(255, 45, 85, 0.15);
+        }
+        .glass-card.purple {
+            background: rgba(175, 82, 222, 0.10);
+            border-color: rgba(175, 82, 222, 0.20);
+        }
+        .glass-card.gray {
+            background: rgba(142, 142, 147, 0.08);
+            border-color: rgba(142, 142, 147, 0.15);
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            pointer-events: none;
+            transition: 0.6s ease;
+        }
+
+        .glass-card.blue::before {
+            background: radial-gradient(circle, rgba(0, 122, 255, 0.15), transparent 70%);
+        }
+        .glass-card.green::before {
+            background: radial-gradient(circle, rgba(52, 199, 89, 0.15), transparent 70%);
+        }
+        .glass-card.orange::before {
+            background: radial-gradient(circle, rgba(255, 149, 0, 0.15), transparent 70%);
+        }
+        .glass-card.pink::before {
+            background: radial-gradient(circle, rgba(255, 45, 85, 0.12), transparent 70%);
+        }
+        .glass-card.purple::before {
+            background: radial-gradient(circle, rgba(175, 82, 222, 0.15), transparent 70%);
+        }
+        .glass-card.gray::before {
+            background: radial-gradient(circle, rgba(142, 142, 147, 0.10), transparent 70%);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+        }
+
+        .glass-card h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+            color: #1d1d1f;
+        }
+
+        .glass-card p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #3a3a3e;
+            position: relative;
+            z-index: 2;
+        }
+
+        .glass-card .tag {
+            display: inline-block;
+            margin-top: 18px;
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .glass-card.blue .tag { background: rgba(0, 122, 255, 0.12); color: #007aff; }
+        .glass-card.green .tag { background: rgba(52, 199, 89, 0.12); color: #34c759; }
+        .glass-card.orange .tag { background: rgba(255, 149, 0, 0.12); color: #ff9500; }
+        .glass-card.pink .tag { background: rgba(255, 45, 85, 0.12); color: #ff2d55; }
+        .glass-card.purple .tag { background: rgba(175, 82, 222, 0.12); color: #af52de; }
+        .glass-card.gray .tag { background: rgba(142, 142, 147, 0.12); color: #8e8e93; }
+
+        /* ===== РАЗДЕЛЫ ===== */
+        .section {
+            padding: 64px 0;
+        }
+
+        .section-glass {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 48px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .section-glass h2 {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .section-glass h2 .os-name {
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-glass p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #3a3a3e;
+            max-width: 780px;
+        }
+
+        .section-glass ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 32px;
+            margin-top: 24px;
+        }
+
+        .section-glass ul li {
+            font-size: 17px;
+            color: #3a3a3e;
+            padding: 8px 0 8px 28px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="%23007aff" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') left center no-repeat;
+            background-size: 18px;
+        }
+
+        .support-block {
+            background: rgba(245, 245, 250, 0.6);
+            border-radius: 32px;
+            padding: 36px 44px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* ===== МОДЕЛИ И КНОПКА КУПИТЬ ===== */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .model-item {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 28px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: 0.3s;
+        }
+
+        .model-item:hover {
+            background: rgba(255, 255, 255, 0.75);
+            transform: translateY(-4px);
+        }
+
+        .model-item .name { font-size: 26px; font-weight: 700; }
+        .model-item .desc { font-size: 15px; color: #3a3a3e; margin: 8px 0 12px; }
+        .model-item .status { margin-top: 14px; font-weight: 600; font-size: 14px; }
+        .model-item.pro { border: 2px solid rgba(0, 122, 255, 0.3); }
+
+        /* ГЛАВНАЯ КНОПКА КУПИТЬ */
+        .buy-section {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px 0;
+        }
+
+        .buy-button {
+            display: inline-block;
+            background: #007aff;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            padding: 18px 56px;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 122, 255, 0.25);
+            letter-spacing: 0.3px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .buy-button:hover {
+            background: #0066cc;
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 122, 255, 0.35);
+        }
+
+        .buy-button:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== OS БЛОК С КАРТИНКОЙ ===== */
+        .os-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .os-grid .os-image {
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: 0.3s;
+        }
+
+        .os-grid .os-image:hover {
+            transform: scale(1.01);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+        }
+
+        .os-grid .os-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 24px;
+            display: block;
+        }
+
+        .os-grid .os-text ul {
+            grid-template-columns: 1fr;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px 32px;
+            color: #8e8e93;
+            font-size: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 18px; }
+            .glass-grid { grid-template-columns: 1fr; }
+            .section-glass { padding: 28px 20px; }
+            .section-glass ul { grid-template-columns: 1fr; }
+            .support-block { padding: 24px; }
+            .nav a { margin-left: 12px; font-size: 13px; }
+            .lang-switch { margin-left: 8px; padding-left: 8px; }
+            .os-grid { grid-template-columns: 1fr; gap: 24px; }
+            .os-grid .os-image { padding: 12px; }
+            .buy-button { font-size: 18px; padding: 14px 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== ШАПКА ===== -->
+<header class="header">
+    <div class="container header-inner">
+        <div class="logo">KRYGIN <span>| AirPhone</span></div>
+        <nav class="nav" id="mainNav">
+            <a href="#about" data-ru="О нас" data-en="About">О нас</a>
+            <a href="#os" data-ru="Ariona OS" data-en="Ariona OS">Ariona OS</a>
+            <a href="#models" data-ru="Модели" data-en="Models">Модели</a>
+            <a href="#support" data-ru="Поддержка" data-en="Support">Поддержка</a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('ru')">РУ</button>
+                <button class="lang-btn" onclick="setLang('en')">EN</button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== ГЕРОЙ ===== -->
+<section class="hero">
+    <div class="container">
+        <h1>AirPhone от <span class="highlight">KRYGIN</span></h1>
+        <p id="heroDesc">Смартфоны с матовыми корпусами, яркими цветами и уникальной операционной системой Ariona OS.</p>
+        <div class="sub" id="heroSub">Простота. Стиль. Технологии.</div>
+    </div>
+</section>
+
+<!-- ===== СТЕКЛЯННЫЕ КАРТОЧКИ ===== -->
+<div class="container">
+    <div class="glass-grid">
+        <div class="glass-card blue">
+            <h3 id="g1_title">Новые AirPhone</h3>
+            <p id="g1_desc">AirPhone S, Pro, Air — каждая модель создана, чтобы подчеркнуть твой стиль.</p>
+            <span class="tag" id="g1_tag">Смотреть</span>
+        </div>
+        <div class="glass-card purple">
+            <h3 id="g2_title">Ariona OS</h3>
+            <p id="g2_desc">Собственная операционная система. Создана для скорости и комфорта. Никакого мусора, только нужные функции.</p>
+            <span class="tag" id="g2_tag">Подробнее</span>
+        </div>
+        <div class="glass-card green">
+            <h3 id="g3_title">Поддержка 24/7</h3>
+            <p id="g3_desc">Мы всегда рядом. Поможем с настройкой, ответим на вопросы, решим любую проблему. Просто напиши.</p>
+            <span class="tag" id="g3_tag">Написать</span>
+        </div>
+        <div class="glass-card pink">
+            <h3 id="g4_title">Сделано с душой</h3>
+            <p id="g4_desc">Каждый AirPhone собирается вручную с вниманием к деталям. Мы создаём не просто телефон — мы создаём впечатление.</p>
+            <span class="tag" id="g4_tag">О нас</span>
+        </div>
+        <div class="glass-card orange">
+            <h3 id="g5_title">Всегда актуальный</h3>
+            <p id="g5_desc">Обновления без проводов. Новые функции приходят автоматически. Твой AirPhone становится лучше каждый месяц.</p>
+            <span class="tag" id="g5_tag">Детали</span>
+        </div>
+        <div class="glass-card gray">
+            <h3 id="g6_title">Сообщество</h3>
+            <p id="g6_desc">Ты не один. Мы — команда, которая создаёт будущее. Присоединяйся к нам и стань частью KRYGIN.</p>
+            <span class="tag" id="g6_tag">Присоединиться</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== О НАС ===== -->
+<section class="section" id="about">
+    <div class="container">
+        <div class="section-glass">
+            <h2 id="aboutTitle">О нас</h2>
+            <p id="aboutP1">KRYGIN — это молодая российская студия, создающая смартфоны AirPhone. Мы соединяем яркий дизайн, матовые корпуса и продуманную операционную систему Ariona OS, чтобы каждый день с AirPhone приносил удовольствие.</p>
+            <p id="aboutP2" style="margin-top:16px;">Мы не гонимся за миллионами. Мы создаём устройство для тех, кто ценит стиль, простоту и индивидуальность. Каждый AirPhone — это продукт, в который вложена душа.</p>
+            <ul>
+                <li id="ab1">Премиальный дизайн</li>
+                <li id="ab2">Матовые корпуса</li>
+                <li id="ab3">Ariona OS</li>
+                <li id="ab4">Гарантия 2 года</li>
+                <li id="ab5">Обновления без проводов</li>
+                <li id="ab6">Экосистема KRYGIN</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ARIONA OS С КАРТИНКОЙ ===== -->
+<section class="section" id="os">
+    <div class="container">
+        <div class="section-glass">
+            <div class="os-grid">
+                <div class="os-text">
+                    <h2>Операционная система <span class="os-name">Ariona OS</span></h2>
+                    <p id="osP">Ariona OS — это операционная система, созданная специально для AirPhone. Она минималистична, быстрая и интуитивно понятная. Никакой рекламы, никакого мусора — только то, что действительно нужно.</p>
+                    <ul>
+                        <li id="os1">Интуитивный интерфейс</li>
+                        <li id="os2">Быстрая работа</li>
+                        <li id="os3">Собственный магазин приложений</li>
+                        <li id="os4">Поддержка всех современных стандартов</li>
+                        <li id="os5">Встроенная навигация</li>
+                        <li id="os6">Автоматические обновления</li>
+                        <li id="os7">Безопасность и конфиденциальность</li>
+                        <li id="os8">Закрытая экосистема</li>
+                    </ul>
+                </div>
+                <div class="os-image">
+                    <img src="ariona.jpg" alt="Ariona OS — операционная система AirPhone" id="osImage" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== МОДЕЛИ И КНОПКА КУПИТЬ ===== -->
+<section class="section" id="models">
+    <div class="container">
+        <div class="section-glass">
+            <h2 id="modelsTitle">Модели AirPhone</h2>
+
+            
+            <!-- БОЛЬШАЯ КНОПКА КУПИТЬ -->
+            <div class="buy-section">
+                <a href="https://www.avito.ru/user/4c6330c815931a527d8119b89ed8912c/profile?src=sharing" target="_blank" class="buy-button" id="buyButton">
+                    Купить на Avito
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ПОДДЕРЖКА ===== -->
+<section class="section" id="support">
+    <div class="container">
+        <div class="section-glass">
+            <h2 id="supportTitle">Поддержка</h2>
+            <div class="support-block">
+                <p id="supportP" style="font-size:18px;">Мы всегда на связи. Поможем с выбором, настройкой, ответим на любые вопросы об AirPhone и Ariona OS. Твоё мнение важно для нас.</p>
+                <p style="margin-top:16px; font-size:18px;">📬 <a href="mailto:krySupport@gmail.com">krySupport@gmail.com</a></p>
+                <p style="margin-top:12px; color:#6e6e73;" id="supportTG">📞 Telegram: @krygin_support (отвечаем в течение часа)</p>
+                <p style="margin-top:20px; color:#6e6e73;" id="supportTime">⏱ Время работы: 10:00 – 22:00 (МСК), без выходных.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ФУТЕР ===== -->
+<footer class="footer">
+    <span id="footer1">© 2026 KRYGIN — AirPhone. Сделано в России.</span><br>
+    <span style="color:#8e8e93;" id="footer2">все права защищены</span>
+</footer>
+
+<script>
+// ============================================================
+//  ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА (РУ / EN)
+// ============================================================
+
+const langData = {
+    ru: {
+        heroDesc: 'Смартфоны с матовыми корпусами, яркими цветами и уникальной операционной системой Ariona OS.',
+        heroSub: 'Простота. Стиль. Технологии.',
+        g1_title: 'Новые AirPhone', g1_desc: 'AirPhone S, Pro, Air — каждая модель создана, чтобы подчеркнуть твой стиль.', g1_tag: 'Смотреть',
+        g2_title: 'Ariona OS', g2_desc: 'Собственная операционная система. Создана для скорости и комфорта. Никакого мусора, только нужные функции.', g2_tag: 'Подробнее',
+        g3_title: 'Поддержка 24/7', g3_desc: 'Мы всегда рядом. Поможем с настройкой, ответим на вопросы, решим любую проблему. Просто напиши.', g3_tag: 'Написать',
+        g4_title: 'Сделано с душой', g4_desc: 'Каждый AirPhone собирается вручную с вниманием к деталям. Мы создаём не просто телефон — мы создаём впечатление.', g4_tag: 'О нас',
+        g5_title: 'Всегда актуальный', g5_desc: 'Обновления без проводов. Новые функции приходят автоматически. Твой AirPhone становится лучше каждый месяц.', g5_tag: 'Детали',
+        g6_title: 'Сообщество', g6_desc: 'Ты не один. Мы — команда, которая создаёт будущее. Присоединяйся к нам и стань частью KRYGIN.', g6_tag: 'Присоединиться',
+        aboutTitle: 'О нас',
+        aboutP1: 'KRYGIN — это молодая российская студия, создающая смартфоны AirPhone. Мы соединяем яркий дизайн, матовые корпуса и продуманную операционную систему Ariona OS, чтобы каждый день с AirPhone приносил удовольствие.',
+        aboutP2: 'Мы не гонимся за миллионами. Мы создаём устройство для тех, кто ценит стиль, простоту и индивидуальность. Каждый AirPhone — это продукт, в который вложена душа.',
+        ab1: 'Премиальный дизайн', ab2: 'Матовые корпуса', ab3: 'Ariona OS', ab4: 'Гарантия 2 года', ab5: 'Обновления без проводов', ab6: 'Экосистема KRYGIN',
+        osP: 'Ariona OS — это операционная система, созданная специально для AirPhone. Она минималистична, быстрая и интуитивно понятная. Никакой рекламы, никакого мусора — только то, что действительно нужно.',
+        os1: 'Интуитивный интерфейс', os2: 'Быстрая работа', os3: 'Собственный магазин приложений', os4: 'Поддержка всех современных стандартов',
+        os5: 'Встроенная навигация', os6: 'Автоматические обновления', os7: 'Безопасность и конфиденциальность', os8: 'Закрытая экосистема',
+        modelsTitle: 'Модели AirPhone',
+        m1_desc: '6.1″, матовый корпус, лёгкий', m1_status: 'В наличии',
+        m2_desc: '6.7″, три камеры, матовый', m2_status: 'Предзаказ',
+        m3_desc: '5.8″, ультратонкий, матовый', m3_status: 'Скоро',
+        supportTitle: 'Поддержка',
+        supportP: 'Мы всегда на связи. Поможем с выбором, настройкой, ответим на любые вопросы об AirPhone и Ariona OS. Твоё мнение важно для нас.',
+        supportTG: '📞 Telegram: @krygin_support (отвечаем в течение часа)',
+        supportTime: '⏱ Время работы: 10:00 – 22:00 (МСК), без выходных.',
+        footer1: '© 2026 KRYGIN — AirPhone. Сделано в России.',
+        footer2: 'все права защищены',
+        buyButton: 'Купить на Avito'
+    },
+    en: {
+        heroDesc: 'Smartphones with matte bodies, bright colors and a unique Ariona OS operating system.',
+        heroSub: 'Simplicity. Style. Technology.',
+        g1_title: 'New AirPhone', g1_desc: 'AirPhone S, Pro, Air — each model is designed to highlight your style.', g1_tag: 'View',
+        g2_title: 'Ariona OS', g2_desc: 'Custom operating system. Built for speed and comfort. No clutter, only the features you need.', g2_tag: 'Learn more',
+        g3_title: '24/7 Support', g3_desc: 'We\'re always here. Help with setup, answer questions, solve any problem. Just write to us.', g3_tag: 'Write us',
+        g4_title: 'Made with heart', g4_desc: 'Every AirPhone is hand‑assembled with attention to detail. We create not just a phone — we create an impression.', g4_tag: 'About us',
+        g5_title: 'Always up‑to‑date', g5_desc: 'Wireless updates. New features come automatically. Your AirPhone gets better every month.', g5_tag: 'Details',
+        g6_title: 'Community', g6_desc: 'You\'re not alone. We are a team building the future. Join us and become part of KRYGIN.', g6_tag: 'Join',
+        aboutTitle: 'About Us',
+        aboutP1: 'KRYGIN is a young Russian studio creating AirPhone smartphones. We combine bright design, matte bodies and a thoughtful Ariona OS to make every day with AirPhone a pleasure.',
+        aboutP2: 'We don\'t chase millions. We create a device for those who value style, simplicity and individuality. Every AirPhone is a product made with heart.',
+        ab1: 'Premium design', ab2: 'Matte bodies', ab3: 'Ariona OS', ab4: '2‑year warranty', ab5: 'Wireless updates', ab6: 'KRYGIN ecosystem',
+        osP: 'Ariona OS is an operating system built specifically for AirPhone. It\'s minimal, fast and intuitive. No ads, no clutter — just what you really need.',
+        os1: 'Intuitive interface', os2: 'Fast performance', os3: 'Own app store', os4: 'Support for all modern standards',
+        os5: 'Built‑in navigation', os6: 'Automatic updates', os7: 'Security and privacy', os8: 'Closed ecosystem',
+        modelsTitle: 'AirPhone Models',
+        m1_desc: '6.1″, matte body, lightweight', m1_status: 'In stock',
+        m2_desc: '6.7″, triple camera, matte', m2_status: 'Pre‑order',
+        m3_desc: '5.8″, ultra‑thin, matte', m3_status: 'Soon',
+        supportTitle: 'Support',
+        supportP: 'We\'re always here. Help with choice, setup, answer any questions about AirPhone and Ariona OS. Your opinion matters to us.',
+        supportTG: '📞 Telegram: @krygin_support (we reply within an hour)',
+        supportTime: '⏱ Working hours: 10:00 – 22:00 (MSK), 7 days a week.',
+        footer1: '© 2026 KRYGIN — AirPhone. Made in Russia.',
+        footer2: 'all rights reserved',
+        buyButton: 'Buy on Avito'
+    }
+};
+
+function setLang(lang) {
+    const btn = event.target;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const data = langData[lang];
+
+    document.getElementById('heroDesc').textContent = data.heroDesc;
+    document.getElementById('heroSub').textContent = data.heroSub;
+
+    for (let i = 1; i <= 6; i++) {
+        document.getElementById(`g${i}_title`).textContent = data[`g${i}_title`];
+        document.getElementById(`g${i}_desc`).textContent = data[`g${i}_desc`];
+        document.getElementById(`g${i}_tag`).textContent = data[`g${i}_tag`];
+    }
+
+    document.getElementById('aboutTitle').textContent = data.aboutTitle;
+    document.getElementById('aboutP1').textContent = data.aboutP1;
+    document.getElementById('aboutP2').textContent = data.aboutP2;
+    for (let i = 1; i <= 6; i++) {
+        document.getElementById(`ab${i}`).textContent = data[`ab${i}`];
+    }
+
+    document.getElementById('osP').textContent = data.osP;
+    for (let i = 1; i <= 8; i++) {
+        document.getElementById(`os${i}`).textContent = data[`os${i}`];
+    }
+
+    document.getElementById('modelsTitle').textContent = data.modelsTitle;
+    document.getElementById('m1_desc').textContent = data.m1_desc;
+    document.getElementById('m1_status').textContent = data.m1_status;
+    document.getElementById('m2_desc').textContent = data.m2_desc;
+    document.getElementById('m2_status').textContent = data.m2_status;
+    document.getElementById('m3_desc').textContent = data.m3_desc;
+    document.getElementById('m3_status').textContent = data.m3_status;
+
+    document.getElementById('supportTitle').textContent = data.supportTitle;
+    document.getElementById('supportP').textContent = data.supportP;
+    document.getElementById('supportTG').textContent = data.supportTG;
+    document.getElementById('supportTime').textContent = data.supportTime;
+
+    document.getElementById('footer1').textContent = data.footer1;
+    document.getElementById('footer2').textContent = data.footer2;
+
+    document.getElementById('buyButton').textContent = data.buyButton;
+
+    document.querySelectorAll('#mainNav a[data-ru]').forEach(a => {
+        a.textContent = lang === 'ru' ? a.dataset.ru : a.dataset.en;
+    });
+}
+</script>
+
+</body>
+</html>
